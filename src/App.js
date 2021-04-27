@@ -4,6 +4,8 @@ import shortid from 'shortid';
 import ContactForm from './Components/ContactForm';
 import ContactList from './Components/ContactList';
 import Filter from './Components/Filter';
+import { connect } from 'react-redux';
+import store from './Redux/store';
 
 class App extends Component {
   state = {
