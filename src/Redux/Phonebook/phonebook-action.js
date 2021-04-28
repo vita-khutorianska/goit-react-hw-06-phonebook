@@ -9,4 +9,9 @@ const addContacts = ({ name, number }) => ({
     id: shortid.generate(),
   },
 });
-export default addContacts;
+const deleteContacts = contactId => ({
+  type: types.DELETE,
+  payload: contactId,
+});
+
+export default { addContacts, deleteContacts };

@@ -27,27 +27,27 @@ class App extends Component {
       localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
   }
 
-  addContact = ({ name, number }) => {
-    // console.log("this.state.contacts",this.state.contacts)
-    const exitingName = this.state.contacts.some(item => item.name === name);
-    console.log('exitingName', exitingName);
+  // addContact = ({ name, number }) => {
+  //   // console.log("this.state.contacts",this.state.contacts)
+  //   const exitingName = this.state.contacts.some(item => item.name === name);
+  //   console.log('exitingName', exitingName);
 
-    if (exitingName) {
-      window.alert(`LocalHost:3000 says ${name} is already in contact`);
-      return;
-    }
-    let contact = {
-      name,
-      number: number,
-      id: shortid.generate(),
-    };
+  //   if (exitingName) {
+  //     window.alert(`LocalHost:3000 says ${name} is already in contact`);
+  //     return;
+  //   }
+  //   let contact = {
+  //     name,
+  //     number: number,
+  //     id: shortid.generate(),
+  //   };
 
-    this.setState(preState => {
-      return {
-        contacts: [contact, ...preState.contacts],
-      };
-    });
-  };
+  //   this.setState(preState => {
+  //     return {
+  //       contacts: [contact, ...preState.contacts],
+  //     };
+  //   });
+  // };
 
   filterChange = e => {
     this.setState({ filter: e.currentTarget.value });
@@ -70,13 +70,10 @@ class App extends Component {
       <div>
         <div>
           <h1>Phonebook</h1>
-          <ContactForm value={name} onSubmit={this.addContact} />
+          <ContactForm />
         </div>
         <Filter value={filter} onChange={this.filterChange} />
-        <ContactList
-          onDeleteContact={this.deleteContact}
-          contacts={filterNamePhoneBook}
-        />
+        <ContactList contacts={filterNamePhoneBook} />
       </div>
     );
   }
