@@ -24,6 +24,7 @@ const ContactList = ({ onDeleteContact, contacts }) => (
     </ul>
   </div>
 );
+
 ContactList.propTypes = {
   onDeleteContact: PropTypes.func.isRequired,
   contacts: PropTypes.arrayOf(
@@ -33,6 +34,13 @@ ContactList.propTypes = {
       number: PropTypes.string,
     }),
   ).isRequired,
+};
+const getFilter = (contacts, filter) => {
+  const normalizedFilter = filter.toLowerCase();
+
+  return contacts.filter(({ text }) =>
+    text.toLowerCase().includes(normalizedFilter),
+  );
 };
 const mapStateToProps = ({ contacts: { items, filter } }) => ({
   // eslint-disable-next-line no-undef
