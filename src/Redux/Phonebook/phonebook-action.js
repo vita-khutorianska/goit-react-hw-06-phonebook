@@ -1,7 +1,7 @@
 import shortid from 'shortid';
 import types from './phonebook-types';
 
-const addContacts = ({ name, number }) => ({
+const addContact = ({ name, number }) => ({
   type: types.ADD,
   payload: {
     name,
@@ -9,7 +9,7 @@ const addContacts = ({ name, number }) => ({
     id: shortid.generate(),
   },
 });
-const deleteContacts = contactId => ({
+const deleteContact = contactId => ({
   type: types.DELETE,
   payload: contactId,
 });
@@ -18,4 +18,4 @@ const filterChange = value => ({
   payload: value,
 });
 
-export default { addContacts, deleteContacts, filterChange };
+export default { addContact, deleteContact, filterChange };

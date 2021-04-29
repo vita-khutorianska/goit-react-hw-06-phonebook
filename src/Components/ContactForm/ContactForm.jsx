@@ -1,7 +1,7 @@
 import shortid from 'shortid';
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import contactsAction from '../../Redux/Phonebook/phonebook-action';
+import action from '../../Redux/Phonebook/phonebook-action';
 import styles from './ContactForm.module.css';
 class ContactForm extends Component {
   state = {
@@ -16,9 +16,22 @@ class ContactForm extends Component {
   };
   handleSubmit = e => {
     e.preventDefault();
+
+    const sameName = this.props.items.some(
+      item => item.name === this.state.name,
+    );
+    if (sameName) {
+      window.alert(
+        `LocalHost:3000 says ${this.state.name} is already in contact`,
+      );
+      this.reset();
+      return;
+    }
     this.props.onSubmit(this.state);
-    this.setState({ name: '', number: '' });
-    // console.log(this.props);
+    this.reset();
+  };
+  reset = () => {
+    return this.setState({ name: '', number: '' });
   };
 
   render() {
@@ -60,10 +73,15 @@ class ContactForm extends Component {
     );
   }
 }
+const mapStateToProps = ({ contacts: { items } }) => {
+  return {
+    items,
+  };
+};
 const mapDispatchToProps = dispatch => {
   return {
     onSubmit: ({ name, number }) =>
-      dispatch(contactsAction.addContact({ name, number })),
+      dispatch(action.addContact({ name, number })),
   };
 };
-export default connect(null, mapDispatchToProps)(ContactForm);
+export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);

@@ -1,7 +1,7 @@
 import styles from './ContactList.module.css';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import contactsAction from '../../Redux/Phonebook/phonebook-action';
+import action from '../../Redux/Phonebook/phonebook-action';
 const ContactList = ({ onDeleteContact, contacts }) => (
   <div className={styles.contact}>
     ContactList
@@ -35,20 +35,18 @@ ContactList.propTypes = {
     }),
   ).isRequired,
 };
-const getFilter = (contacts, filter) => {
-  const normalizedFilter = filter.toLowerCase();
-
-  return contacts.filter(({ text }) =>
-    text.toLowerCase().includes(normalizedFilter),
+const getFilter = (allContacts, filter) => {
+  const normalisedFilter = filter.toLowerCase();
+  return allContacts.filter(({ name }) =>
+    name.toLowerCase().includes(normalisedFilter),
   );
 };
 const mapStateToProps = ({ contacts: { items, filter } }) => ({
-  // eslint-disable-next-line no-undef
   contacts: getFilter(items, filter),
 });
 const mapDispatchToProps = dispatch => {
   return {
-    onDeleteContact: id => dispatch(contactsAction.deleteContact(id)),
+    onDeleteContact: id => dispatch(action.deleteContact(id)),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ContactList);
