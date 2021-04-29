@@ -6,7 +6,7 @@ import ContactList from './Components/ContactList';
 import Filter from './Components/Filter';
 import { connect } from 'react-redux';
 import store from './Redux/store';
-import contactsAction from './Redux/Phonebook/phonebook-action';
+import * as actions from './Redux/Phonebook/phonebook-action';
 function App({ items, filter, onAddContact }) {
   // state = {
   //   contacts: [
