@@ -18,12 +18,9 @@ import { createAction } from '@reduxjs/toolkit';
 //   payload: value,
 // });
 
-export const addContact = createAction(
-  'contacts/addContact',
-  ({ name, number }) => ({
-    payload: { id: shortid.generate(), name, number },
-  }),
-);
+export const addContact = createAction('contacts/add', ({ name, number }) => ({
+  payload: { id: shortid.generate(), name, number },
+}));
 export const filterChange = createAction('contacts/filter');
 export const deleteContact = createAction('contacts/delete');
 // eslint-disable-next-line import/no-anonymous-default-export

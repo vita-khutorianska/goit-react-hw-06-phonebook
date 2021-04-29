@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit';
 import * as actions from './phonebook-action';
 
-const itemReducer = createReducer([], {
+const items = createReducer([], {
   [actions.addContact]: (state, { payload }) => [...state, payload],
 
   [actions.deleteContact]: (state, { payload }) => [
@@ -10,13 +10,13 @@ const itemReducer = createReducer([], {
   ],
 });
 
-const filterReducer = createReducer('', {
+const filter = createReducer('', {
   [actions.filterChange]: (state, { payload }) => payload,
 });
 
 export default combineReducers({
-  items: itemReducer,
-  filter: filterReducer,
+  items,
+  filter,
 });
 // const items = (state = [], { type, payload }) => {
 //   switch (type) {
@@ -40,8 +40,3 @@ export default combineReducers({
 //       return state;
 //   }
 // };
-
-// export default combineReducers({
-//   items,
-//   filter,
-// });
